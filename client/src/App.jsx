@@ -11,7 +11,7 @@ import StudentAssignment from './pages/StudentAssignment'
 
 const App = () => {
 
-  const {student, faculty} = useAppContext()
+  const {student, faculty, loading} = useAppContext()
 
   const location = useLocation()
   const isLoginPage =
@@ -19,6 +19,14 @@ const App = () => {
     location.pathname === "/faculty/login"
 
   const showNavbar = (student || faculty) && !isLoginPage
+
+  if (loading) {
+        return (
+          <div className="h-screen flex justify-center items-center">
+            Loading...
+          </div>
+        )
+  }
 
   return (
     <div className='text-default h-screen text-gray-700 bg-white overflow-hidden'>

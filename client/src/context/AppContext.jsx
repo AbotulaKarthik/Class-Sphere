@@ -18,6 +18,8 @@ export const AppContextProvider = ({children})=>{
     const [student,setStudent] = useState(null)
     const [faculty,setFaculty] = useState(null)
 
+    const [loading, setLoading] = useState(true)
+
     const [members,setMembers] = useState(dummyMembers)
 
     const [facultyClasses,setFacultyClasses] = useState([])
@@ -82,8 +84,17 @@ export const AppContextProvider = ({children})=>{
     }
 
     useEffect(()=>{
-        fetchuser()
-        fetchFaculty()
+        const initialize = async () => {
+
+        await Promise.all([
+            fetchuser(),
+            fetchFaculty()
+        ])
+
+        setLoading(false)
+        }
+
+        initialize()
     },[])
 
     useEffect(()=>{
@@ -102,7 +113,7 @@ export const AppContextProvider = ({children})=>{
     const value={
         student,setStudent,axios,navigate,
         faculty,setFaculty,members,
-        facultyClasses,selectedClass,setSelectedClass,studentClasses
+        facultyClasses,selectedClass,setSelectedClass,studentClasses,loading
     }
 
     return ( 

@@ -15,7 +15,10 @@ import submissionRouter from './routes/submissionRoutes.js'
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'https://class-sphere-lyart.vercel.app/'
+    ],
     credentials: true
 }))
 
